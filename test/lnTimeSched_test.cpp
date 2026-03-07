@@ -17,8 +17,8 @@
 
 
 WiFiManagerNB   wifiManager;
-lnTimeClock     ln_clock;
-lnTimeScheduler scheduler(&ln_clock);
+lnTimeClock     lnTime;
+lnTimeScheduler scheduler(&lnTime);
 
 
 void wifiInit() {
@@ -50,7 +50,7 @@ void setup() {
     wifiInit();
 
     // supponiamo WiFi già gestito altrove
-    ln_clock.begin();
+    lnTime.begin();
 
     scheduler.onMinute(onMinuteCB);
     scheduler.at(12,0,0,onNoon);
@@ -60,7 +60,7 @@ void setup() {
 }
 
 void loop() {
-    ln_clock.update();
+    lnTime.update();
     scheduler.update();
     wifiManager.update();
 }
